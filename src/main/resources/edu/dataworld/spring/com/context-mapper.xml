@@ -12,7 +12,7 @@
 
         <property name="mapperLocations">
             <list>
-                <value>classpath:edu/dataworld/mapper/snackworld/member/member.xml</value>
+                <value>classpath:/edu/dataworld/mapper/snackworld/**/*.xml</value>
             </list>
         </property>
     </bean>
