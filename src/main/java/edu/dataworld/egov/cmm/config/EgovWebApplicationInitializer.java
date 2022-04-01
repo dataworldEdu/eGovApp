@@ -35,7 +35,7 @@ public class EgovWebApplicationInitializer implements WebApplicationInitializer 
 
         // Root Context 설정
         XmlWebApplicationContext rootContext = new XmlWebApplicationContext();
-        rootContext.setConfigLocation("classpath*:edu.dataworld.spring.com/**/context-*.xml");
+        rootContext.setConfigLocations(new String[] { "classpath*:edu/dataworld/spring/com/**/context-*.xml"});
         rootContext.refresh();
         rootContext.start();
 
