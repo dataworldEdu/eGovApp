@@ -9,6 +9,6 @@ public class MainController {
 
     @RequestMapping(value="/index.do")
     public String index() {
-        return "index";
+        return "redirect:/login/loginForm.do";
     }
 }

@@ -45,7 +45,7 @@ public class EgovWebApplicationInitializer implements WebApplicationInitializer 
         XmlWebApplicationContext xmlWebApplicationContext = new XmlWebApplicationContext();
         xmlWebApplicationContext.setConfigLocation("/WEB-INF/config/egovframework/springmvc/egov-com-*.xml");
 
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet());
+        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(xmlWebApplicationContext));
         dispatcher.addMapping("*.do");
         dispatcher.setLoadOnStartup(1);
 
@@ -56,10 +56,10 @@ public class EgovWebApplicationInitializer implements WebApplicationInitializer 
         servletContext.addListener(new RequestContextListener());
 
         // 세션 타임아웃 필터
-        FilterRegistration.Dynamic sessionTimeoutFilter = servletContext.addFilter("sessionTimeoutFilter", new SessionTimeoutCookieFilter());
-        sessionTimeoutFilter.addMappingForUrlPatterns(null, false, "*.do");
-
-        servletContext.addListener(new RequestContextListener());
+//        FilterRegistration.Dynamic sessionTimeoutFilter = servletContext.addFilter("sessionTimeoutFilter", new SessionTimeoutCookieFilter());
+//        sessionTimeoutFilter.addMappingForUrlPatterns(null, false, "*.do");
+//
+//        servletContext.addListener(new RequestContextListener());
 
         logger.debug("EgovWebApplicationInitializer END-============================================");
     }

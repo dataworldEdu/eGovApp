@@ -5,16 +5,16 @@
 
 <tiles-definitions>
 
-    <definition name=".root" template="/WEB-INF/jsp/tiles/tiles-layout.jsp">
+    <definition name="baseLayout" template="/WEB-INF/jsp/tiles/tiles-layout.jsp">
         <put-attribute name="title" value=""/>
         <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp" />
     </definition>
 
-    <definition name="/login/*" extends=".root">
+    <definition name="/login/*" extends="baseLayout">
         <put-attribute name="main" value="/WEB-INF/jsp/login/{1}.jsp" />
     </definition>
-    <definition name="/*/*" extends=".root">
-        <put-attribute name="main" value="/WEB-INF/jsp/{1}/{2}.jsp" />
+    <definition name="/member/*" extends="baseLayout">
+        <put-attribute name="main" value="/WEB-INF/jsp/member/{1}.jsp" />
     </definition>
 
 </tiles-definitions>
