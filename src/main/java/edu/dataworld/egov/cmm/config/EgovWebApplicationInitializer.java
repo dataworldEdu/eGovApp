@@ -2,6 +2,7 @@ package edu.dataworld.egov.cmm.config;
 
 import edu.dataworld.egov.cmm.context.EgovWebServletContextListener;
 import edu.dataworld.egov.cmm.filter.SessionTimeoutCookieFilter;
+import edu.dataworld.snackworld.member.service.MemberService;
 import egovframework.rte.ptl.mvc.filter.HTMLTagFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import javax.ws.rs.core.Request;
+import java.lang.annotation.Annotation;
+import java.util.Arrays;
 
 public class EgovWebApplicationInitializer implements WebApplicationInitializer {
 
@@ -35,7 +38,7 @@ public class EgovWebApplicationInitializer implements WebApplicationInitializer 
 
         // Root Context 설정
         XmlWebApplicationContext rootContext = new XmlWebApplicationContext();
-        rootContext.setConfigLocations(new String[] { "classpath*:edu/dataworld/spring/com/**/context-*.xml"});
+        rootContext.setConfigLocations(new String[] {"classpath*:edu/dataworld/spring/com/**/context-*.xml"});
         rootContext.refresh();
         rootContext.start();
 
@@ -46,20 +49,18 @@ public class EgovWebApplicationInitializer implements WebApplicationInitializer 
         xmlWebApplicationContext.setConfigLocation("/WEB-INF/config/egovframework/springmvc/egov-com-*.xml");
 
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(xmlWebApplicationContext));
-        dispatcher.addMapping("*.do");
+        dispatcher.addMapping("/");
         dispatcher.setLoadOnStartup(1);
 
         // Html tag 에 대한 필터링 적용
         FilterRegistration.Dynamic htmlTagFiler = servletContext.addFilter("htmlTagFilter", new HTMLTagFilter());
         htmlTagFiler.addMappingForUrlPatterns(null, false, "*.do");
 
-        servletContext.addListener(new RequestContextListener());
-
         // 세션 타임아웃 필터
 //        FilterRegistration.Dynamic sessionTimeoutFilter = servletContext.addFilter("sessionTimeoutFilter", new SessionTimeoutCookieFilter());
 //        sessionTimeoutFilter.addMappingForUrlPatterns(null, false, "*.do");
 //
-//        servletContext.addListener(new RequestContextListener());
+        servletContext.addListener(new RequestContextListener());
 
         logger.debug("EgovWebApplicationInitializer END-============================================");
     }

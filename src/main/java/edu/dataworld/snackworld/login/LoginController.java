@@ -9,7 +9,7 @@ public class LoginController {
 
     @RequestMapping("/loginForm.do")
     public String loginForm() {
-        return "/login/loginForm";
+        return "/login/loginForm.view";
     }
 
 
